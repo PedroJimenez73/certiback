@@ -53,6 +53,7 @@ app.post('/', (req, res, next)=>{
             res.status(200).json({
                 token: token,
                 nombre: datos.nombre,
+                id: datos.id
             });
         });
     });

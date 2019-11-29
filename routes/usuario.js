@@ -20,7 +20,7 @@ app.get('/', (req, res, next) =>{
 });
 
 app.get('/:id', (req, res, next) =>{
-    Usuario.find({_id: req.params.id}).exec((err,datos)=>{
+    Usuario.findById(req.params.id, (err,datos)=>{
         if(err){
             return res.status(400).json({
                 errores: err 
@@ -28,7 +28,7 @@ app.get('/:id', (req, res, next) =>{
         }
 
         res.status(200).json({
-            usuario: datos[0]
+            usuario: datos
         })
     });
 });
@@ -40,7 +40,8 @@ app.post('/', (req,res)=>{
         nombre: body.nombre,
         email: body.email,
         password: bcryptjs.hashSync(body.password, 10),
-        conectado: false
+        conectado: false,
+        imagen: 'avatar.svg'
     })
 
     usuario.save((err, datos)=>{
@@ -56,5 +57,36 @@ app.post('/', (req,res)=>{
     })
 
 })
+
+app.put('/:id', /*autenToken.verificarToken,*/ (req, res, next)=>{
+    var body = req.body;
+    Usuario.findById(req.params.id, (err, usuario)=>{
+        if(err){
+            return res.status(500).json({
+                mensaje: 'Error de conexión con servidor'
+            });
+        };
+        usuario.nombre = body.nombre;
+        usuario.password = bcryptjs.hashSync(body.password, 10);
+        usuario.direccion = body.direccion;
+        usuario.cp = body.cp;
+        usuario.localidad = body.localidad;
+        usuario.imagen = body.imagen;
+
+        usuario.save((err, usuarioModificado)=>{
+            if(err){
+                return res.status(400).json({
+                    ok: false,
+                    mensaje: 'Error al modificar usuario',
+                    errores: err
+                });
+            };
+            res.status(200).json({
+                ok: true,
+                mensaje: 'Usuario actualizado correctamente'
+            });
+        });
+    });
+});
 
 module.exports = app;
