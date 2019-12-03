@@ -37,9 +37,7 @@ app.post('/', proteccionhttp.checkToken, (req,res)=>{
     var intento = new Intento({
         fecha: new Date(),
         usuario: req._id,
-        respuestas: body.respuestas,
-        aciertos: body.aciertos,
-        resultado: body.resultado
+        examen: body.examen
     })
 
     intento.save((err, datos)=>{

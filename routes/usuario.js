@@ -67,7 +67,6 @@ app.put('/:id', /*autenToken.verificarToken,*/ (req, res, next)=>{
             });
         };
         usuario.nombre = body.nombre;
-        usuario.password = bcryptjs.hashSync(body.password, 10);
         usuario.direccion = body.direccion;
         usuario.cp = body.cp;
         usuario.localidad = body.localidad;

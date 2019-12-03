@@ -84,7 +84,7 @@ io.on("connection", socket => {
             if(err){
                 return console.log(err);
             }
-            console.log('sesión actualizada')
+            console.log('Sesión iniciada')
         });
     });
     
@@ -112,7 +112,7 @@ io.on("connection", socket => {
                         if(err){
                             return console.log(err);
                         }
-                        console.log('sesión actualizada')
+                        console.log('Sesión cerrada')
                     });
                     break;
                 }
