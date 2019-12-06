@@ -12,6 +12,7 @@ let Usuario = require('./models/usuario');
 let usuario = require('./routes/usuario');
 let auth = require('./routes/auth');
 let intento = require('./routes/intento');
+let examen = require('./routes/examen');
 
 let Sesion = require('./models/sesion');
 let fs = require('fs');
@@ -25,7 +26,8 @@ let storage = multer.diskStorage({
         cb(null, DIR)
     },
     filename: function (req, file, cb) {
-        cb(null, req.body.nombre + '.' + file.originalname.split('.')[file.originalname.split('.').length -1] );
+        console.log(req.body);
+        cb(null, req.body.imagen);
     }
 })
 
@@ -55,6 +57,7 @@ app.post('/imagenes', upload.single('file'), function (req, res, next) {
 app.use('/usuario', usuario);
 app.use('/auth', auth);
 app.use('/intento', intento);
+app.use('/examen', examen);
 app.use('/imagenes', express.static('imagenes'));
 
 

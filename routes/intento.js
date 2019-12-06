@@ -54,4 +54,29 @@ app.post('/', proteccionhttp.checkToken, (req,res)=>{
 
 })
 
+app.put('/:id', proteccionhttp.checkToken, (req, res, next)=>{
+    var body = req.body;
+    Intento.findById(req.params.id, (err, intento)=>{
+        if(err){
+            return res.status(500).json({
+                mensaje: 'Error de conexión con servidor'
+            });
+        };
+        intento.resultados = body.results;
+        intento.correctas = body.correctAnswers;
+
+        intento.save((err, intentoModificado)=>{
+            if(err){
+                return res.status(400).json({
+                    mensaje: 'Error al modificar el intento',
+                    errores: err
+                });
+            };
+            res.status(200).json({
+                mensaje: 'Intento actualizado correctamente'
+            });
+        });
+    });
+});
+
 module.exports = app;
