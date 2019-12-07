@@ -142,9 +142,22 @@ const  exams = [
 app.get('/', (req, res) =>{
 
     res.status(200).json({
-        exam: exams[0]
+        exams: exams
     })
 
+});
+
+app.get('/:id', (req, res) =>{
+    // if(req.params.id === '001') {
+        console.log(exams[0]);
+        res.status(200).json({
+            exam: exams[0]
+        });
+    // } else {
+    //     res.status(200).json({
+    //         exam: exams[1]
+    //     }); 
+    // }
 });
 
 module.exports = app;
