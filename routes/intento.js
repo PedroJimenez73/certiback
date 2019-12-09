@@ -4,19 +4,19 @@ var proteccionhttp = require('../middleware/protecthttp');
 
 var Intento = require('../models/intento');
 
-// app.get('/', (req, res, next) =>{
-//     Usuario.find({}).exec((err,datos)=>{
-//         if(err){
-//             return res.status(400).json({
-//                 errores: err 
-//             })
-//         }
+app.get('/', (req, res, next) =>{
+    Intento.find({}).exec((err,datos)=>{
+        if(err){
+            return res.status(400).json({
+                errores: err 
+            })
+        }
 
-//         res.status(200).json({
-//             usuarios: datos
-//         })
-//     });
-// });
+        res.status(200).json({
+            intentos: datos
+        })
+    });
+});
 
 // app.get('/:id', (req, res, next) =>{
 //     Usuario.find({_id: req.params.id}).exec((err,datos)=>{

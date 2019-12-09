@@ -26,7 +26,6 @@ let storage = multer.diskStorage({
         cb(null, DIR)
     },
     filename: function (req, file, cb) {
-        console.log(req.body);
         cb(null, req.body.imagen);
     }
 })
@@ -52,7 +51,6 @@ app.use(bodyParser.json({strict: false}));
 app.use(bodyParser.urlencoded({'extended': 'false'}));
 
 app.post('/imagenes', upload.single('file'), function (req, res, next) {
-    console.log(req);
 });
 
 app.use('/usuario', usuario);
