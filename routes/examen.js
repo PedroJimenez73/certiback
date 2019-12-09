@@ -85,12 +85,11 @@ const  exams = [
         },
         {
             question: `An administrator is attempting to power on a virtual machine with 32GB of memory. The operation fails with the following error:
-                       <br>
-                       <span>Could not power on VM : No space left on device</span>
-                       <br>
-                       Checking the space on the virtual machine’s datastore, there is 30GB free.
-                       <br>
-                       Which action would allow the VM to power on?
+                       <ul>
+                       <li>Could not power on VM : No space left on device</li>
+                       <li>Checking the space on the virtual machine’s datastore, there is 30GB free.</li>
+                       <li>Which action would allow the VM to power on?</li>
+                       </ul>
                     `,
             answers: [
                 'Set a 2GB memory reservation on the VM.',
@@ -135,9 +134,7 @@ const  exams = [
       pic: 'assets/cisco.svg',
       production: false,
     }
-  ];
-
-
+];
 
 app.get('/', (req, res) =>{
 
@@ -149,7 +146,6 @@ app.get('/', (req, res) =>{
 
 app.get('/:id', (req, res) =>{
     // if(req.params.id === '001') {
-        console.log(exams[0]);
         res.status(200).json({
             exam: exams[0]
         });

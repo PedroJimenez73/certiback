@@ -73,7 +73,8 @@ app.put('/:id', proteccionhttp.checkToken, (req, res, next)=>{
                 });
             };
             res.status(200).json({
-                mensaje: 'Intento actualizado correctamente'
+                mensaje: 'Las respuestas han sido grabadas correctamente',
+                intento: intentoModificado
             });
         });
     });
