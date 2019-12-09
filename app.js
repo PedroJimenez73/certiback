@@ -32,9 +32,10 @@ let storage = multer.diskStorage({
 })
 
 let upload = multer({ storage: storage });
+const mongoURI = 'mongodb+srv://pedro:stavros@cluster0-zm7ju.mongodb.net/app?retryWrites=true&w=majority';
 
 mongoose.Promise = require('bluebird');
-mongoose.connect('mongodb://localhost:27017/certimaster',{useUnifiedTopology: true, useNewUrlParser: true, promiseLibrary: require('bluebird')})
+mongoose.connect(mongoURI,{useUnifiedTopology: true, useNewUrlParser: true, promiseLibrary: require('bluebird')})
             .then(()=>{
                 console.log('Conectado a DB');
             })
@@ -44,7 +45,7 @@ mongoose.connect('mongodb://localhost:27017/certimaster',{useUnifiedTopology: tr
 
 app.use(cors({
     credentials: true,
-    origin: 'http://localhost:4200'
+    origin: 'http://certitraining.s3-website-eu-west-1.amazonaws.com'
 }));
 
 app.use(bodyParser.json({strict: false}));
