@@ -44,8 +44,8 @@ mongoose.connect(mongoURI,{useUnifiedTopology: true, useNewUrlParser: true, prom
 
 app.use(cors({
     credentials: true,
-    //origin: 'http://certitraining.s3-website-eu-west-1.amazonaws.com'
-    origin: 'http://localhost:4200'
+    origin: 'http://certitraining.s3-website-eu-west-1.amazonaws.com'
+    //origin: 'http://localhost:4200'
 }));
 
 app.use(bodyParser.json({strict: false}));
