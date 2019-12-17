@@ -19,7 +19,7 @@ app.get('/', (req, res, next) =>{
     });
 });
 
-app.get('/:id', (req, res, next) =>{
+app.get('/:id', proteccionhttp.checkToken, (req, res, next) =>{
     Usuario.findById(req.params.id, (err,datos)=>{
         if(err){
             return res.status(400).json({
@@ -33,14 +33,12 @@ app.get('/:id', (req, res, next) =>{
     });
 });
 
-//app.post('/', proteccionhttp.checkToken, (req,res)=>{
 app.post('/', (req,res)=>{
     var body = req.body;
     var usuario = new Usuario({
         nombre: body.nombre,
         email: body.email,
         password: bcryptjs.hashSync(body.password, 10),
-        conectado: false,
         imagen: 'avatar.svg'
     })
 

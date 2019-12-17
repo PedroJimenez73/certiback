@@ -9,7 +9,8 @@ var UsuarioSchema = new mongoose.Schema({
     direccion: String,
     cp: String,
     localidad: String,
-    imagen: String
+    imagen: String,
+    sessionId: String
 });
 
 UsuarioSchema.plugin(uniqueValidator, {message: 'El correo electrónico ya está en uso'});
