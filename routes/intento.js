@@ -4,8 +4,35 @@ var proteccionhttp = require('../middleware/protecthttp');
 
 var Intento = require('../models/intento');
 
-app.get('/', (req, res, next) =>{
-    Intento.find({}).exec((err,datos)=>{
+app.get('/:idUsuario', (req, res, next) =>{
+    let idUsuario = req.params.idUsuario;
+    Intento.find({usuario: idUsuario}).sort({fecha: -1}).exec((err,datos)=>{
+        if(err){
+            return res.status(400).json({
+                errores: err 
+            })
+        }
+        res.status(200).json({
+            intentos: datos
+        })
+    });
+});
+
+app.get('/exam/:idUsuario/:idExam', (req, res, next) =>{
+    Intento.find({usuario: req.params.idUsuario, "examen._id": req.params.idExam }).sort({fecha: -1}).exec((err,datos)=>{
+        if(err){
+            return res.status(400).json({
+                errores: err 
+            })
+        }
+        res.status(200).json({
+            intentos: datos
+        })
+    });
+});
+
+app.get('/int/:id', (req, res, next) =>{
+    Intento.find({_id: req.params.id}).exec((err,datos)=>{
         if(err){
             return res.status(400).json({
                 errores: err 
@@ -13,24 +40,10 @@ app.get('/', (req, res, next) =>{
         }
 
         res.status(200).json({
-            intentos: datos
+            intento: datos[0]
         })
     });
 });
-
-// app.get('/:id', (req, res, next) =>{
-//     Usuario.find({_id: req.params.id}).exec((err,datos)=>{
-//         if(err){
-//             return res.status(400).json({
-//                 errores: err 
-//             })
-//         }
-
-//         res.status(200).json({
-//             usuario: datos[0]
-//         })
-//     });
-// });
 
 app.post('/', proteccionhttp.checkToken, (req,res)=>{
     var body = req.body;

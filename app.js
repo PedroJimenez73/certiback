@@ -44,8 +44,8 @@ mongoose.connect(mongoURI,{useUnifiedTopology: true, useNewUrlParser: true, prom
 
 app.use(cors({
     credentials: true,
-    origin: 'http://certitraining.s3-website-eu-west-1.amazonaws.com'
-    //origin: 'http://localhost:4200'
+    //origin: 'http://certitraining.s3-website-eu-west-1.amazonaws.com'
+    origin: 'http://localhost:4200'
 }));
 
 app.use(bodyParser.json({strict: false}));
@@ -59,7 +59,7 @@ app.use('/auth', auth);
 app.use('/intento', intento);
 app.use('/examen', examen);
 app.use('/imagenes', express.static('imagenes'));
-
+app.use('/logos', express.static('logos'));
 
 app.listen(3000, ()=>{
     console.log("started on port 3000");
