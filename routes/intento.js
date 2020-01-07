@@ -4,7 +4,7 @@ var proteccionhttp = require('../middleware/protecthttp');
 
 var Intento = require('../models/intento');
 
-app.get('/:idUsuario', (req, res, next) =>{
+app.get('/:idUsuario', proteccionhttp.checkToken, (req, res, next) =>{
     let idUsuario = req.params.idUsuario;
     Intento.find({usuario: idUsuario}).sort({fecha: -1}).exec((err,datos)=>{
         if(err){
@@ -18,7 +18,7 @@ app.get('/:idUsuario', (req, res, next) =>{
     });
 });
 
-app.get('/exam/:idUsuario/:idExam', (req, res, next) =>{
+app.get('/exam/:idUsuario/:idExam', proteccionhttp.checkToken, (req, res, next) =>{
     Intento.find({usuario: req.params.idUsuario, "examen._id": req.params.idExam }).sort({fecha: -1}).exec((err,datos)=>{
         if(err){
             return res.status(400).json({
@@ -31,7 +31,7 @@ app.get('/exam/:idUsuario/:idExam', (req, res, next) =>{
     });
 });
 
-app.get('/int/:id', (req, res, next) =>{
+app.get('/int/:id', proteccionhttp.checkToken, (req, res, next) =>{
     Intento.find({_id: req.params.id}).exec((err,datos)=>{
         if(err){
             return res.status(400).json({

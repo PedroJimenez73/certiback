@@ -56,7 +56,7 @@ app.post('/', (req,res)=>{
 
 })
 
-app.put('/:id', /*autenToken.verificarToken,*/ (req, res, next)=>{
+app.put('/:id', proteccionhttp.checkToken, (req, res, next)=>{
     var body = req.body;
     Usuario.findById(req.params.id, (err, usuario)=>{
         if(err){
